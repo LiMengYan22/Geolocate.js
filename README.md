@@ -1,2 +1,2 @@
 # Geolocate.js
-Geolocalización con JAVASCRIPT y un poco de HTML/CSS..
+**Geolocalización** (II-*flotante*) con JAVASCRIPT y un poco de HTML/CSS..
