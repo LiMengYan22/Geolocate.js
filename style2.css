@@ -1,0 +1,55 @@
+#ventana-flotante {
+width: 440px; /* Ancho de la ventana */
+height: 400px; /* Alto de la ventana */
+/*background: #ffffff; Color de fondo */
+position: fixed;
+top: 200px;
+left: 47%;
+margin-left: -180px;
+/*border: 0px solid #ffffff; Borde de la ventana */
+/*box-shadow: 0 5px 25px rgba(0,0,0,.1); Sombra */
+z-index:999;
+}
+#ventana-flotante #contenedor {
+padding: 0px 10px 10px 10px;
+}
+#ventana-flotante .cerrar {
+float: right;
+border-bottom: 10px solid #bbb;
+border-left: 0px solid #bbb;
+color: #000000;
+background: white;
+line-height: 17px;
+text-decoration: none;padding: 0px 14px;
+font-family: Arial;
+border-radius: 0 0 0 5px;
+box-shadow: 0px 0px white;
+font-size: 18px;
+-webkit-transition: .3s;
+-moz-transition: .3s;
+-o-transition: .3s;
+-ms-transition: .3s;
+}
+#ventana-flotante .cerrar:hover {
+background: #;
+color: white;
+text-decoration: none;
+text-shadow: 0px 0px black;
+border-bottom: 0px solid black;
+border-left: 0px solid black;
+}
+#ventana-flotante #contenedor .contenido {
+padding: 15px;
+box-shadow: inset 0px 0px white;
+background: #fff; /*Fondo del mensaje */
+/*border: 1px solid #ffffff; Borde del mensaje */
+font-size: 20px; /* Tamaño del texto del mensaje */
+color: #fff; /* Color del texto del mensaje */
+text-shadow: 0px 0px white;
+margin: 0 auto;
+border-radius: 200px;
+}
+.oculto {-webkit-transition:1s;-moz-transition:1s;-o-transition:1s;-ms-
+transition:1s;opacity:0;-ms-opacity:0;-moz-opacity:0;visibility:hidden;}
+
+
