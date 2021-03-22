@@ -1,0 +1,179 @@
+<style>
+#flotante1 { position:fixed; top:30px; right:-250px; float:right; width:288px;
+display:block; padding:0; z-index:1002; border:none; -moz-transition: all 2s;
+-webkit-transition: all 2s; -o-transition: all 2s; }
+#flotante1:hover, #flotante2:hover, #flotante3:hover { right:0px; -moz-
+transition: all 1s; -webkit-transition: all 1s; -o-transition: all 1s; }
+div.likeboxwrap { margin-top:-5px; margin-left:-45px; width:238px;
+height:355px;
+background-color:#fff; overflow:hidden; border:none;}
+</style>
+
+<!--
+---------------------------------------------------------------------------------------
+-->
+
+
+<div id='ventana-flotante' class='animate slideUp, floating'>
+   <div id='contenedor'>
+          <a class='cerrar' href='javascript:void(0);'onclick='document.getElementById(&apos;ventana-flotante&apos;).className= &apos;oculto&apos;'>x</a>
+   <div align='center' class='contenido'>
+     <h4 style='color: #e89980'><br>
+         TU POSICIÓN:
+         <div id='ubicacion'></div>
+     </h4>
+     
+     <div id="texto">   
+     <script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;language=es"></script>
+     <style type="text/css">
+        #texto{color:#e89980;width:100%;height:100%;float:left;padding:0%}
+        #texto input.navi{font-size:10px;width:100%;height:0px;margin-bottom:0px;padding-left:0%}
+     </style>
+     
+     <h6>
+       <input id="address" float="left" type="textbox" size="20" maxlength="80" value="" placeholder="Dirección o Lat, Lng" /><br><br>
+         Latitud: <span style="color:#e89980" id="x"></span> <!-- #FF00AA --><br>
+         Longitud: <span style="color:#e89980" id="y"></span><br>
+         Dirección completa: <span style="color:#e89980" id="direccion"></span><br><br>
+       <input type="button" value="Localizar" onclick="codeAddress()"><br>
+    </h6>
+    </div>
+     
+     
+ <!-- Se determina y escribe la localizacion -->
+<script type='text/javascript'>
+if (navigator.geolocation) {
+navigator.geolocation.getCurrentPosition(mostrarUbicacion);
+} else {alert('¡Error! Este navegador no soporta la Geolocalización.');}
+function mostrarUbicacion(position) {
+var times = position.timestamp;
+var latitud = position.coords.latitude;
+var longitud = position.coords.longitude;
+var altitud = position.coords.altitude;
+var exactitud = position.coords.accuracy;
+var div = document.getElementById('ubicacion');
+div.innerHTML ='Latitud: ' + latitud + '<br>Longitud: ' + longitud;}
+function refrescarUbicacion() {
+navigator.geolocation.watchPosition(mostrarUbicacion);}
+</script>
+     
+      </div>
+   </div>
+</div>
+
+<!--
+---------------------------------------------------------------------------------------
+-->
+<style>
+#ventana-flotante {
+width: 440px; /* Ancho de la ventana */
+height: 400px; /* Alto de la ventana */
+/*background: #ffffff; Color de fondo */
+position: fixed;
+top: 200px;
+left: 47%;
+margin-left: -180px;
+/*border: 0px solid #ffffff; Borde de la ventana */
+/*box-shadow: 0 5px 25px rgba(0,0,0,.1); Sombra */
+z-index:999;
+}
+#ventana-flotante #contenedor {
+padding: 0px 10px 10px 10px;
+}
+#ventana-flotante .cerrar {
+float: right;
+border-bottom: 10px solid #bbb;
+border-left: 0px solid #bbb;
+color: #000000;
+background: white;
+line-height: 17px;
+text-decoration: none;padding: 0px 14px;
+font-family: Arial;
+border-radius: 0 0 0 5px;
+box-shadow: 0px 0px white;
+font-size: 18px;
+-webkit-transition: .3s;
+-moz-transition: .3s;
+-o-transition: .3s;
+-ms-transition: .3s;
+}
+#ventana-flotante .cerrar:hover {
+background: #;
+color: white;
+text-decoration: none;
+text-shadow: 0px 0px black;
+border-bottom: 0px solid black;
+border-left: 0px solid black;
+}
+#ventana-flotante #contenedor .contenido {
+padding: 15px;
+box-shadow: inset 0px 0px white;
+background: #fff; /*Fondo del mensaje */
+/*border: 1px solid #ffffff; Borde del mensaje */
+font-size: 20px; /* Tamaño del texto del mensaje */
+color: #fff; /* Color del texto del mensaje */
+text-shadow: 0px 0px white;
+margin: 0 auto;
+border-radius: 200px;
+}
+.oculto {-webkit-transition:1s;-moz-transition:1s;-o-transition:1s;-ms-
+transition:1s;opacity:0;-ms-opacity:0;-moz-opacity:0;visibility:hidden;}
+</style>
+<!--
+---------------------------------------------------------------------------------------
+-->
+
+<div id="mapa"></div>
+
+<script type="text/javascript">
+//<![CDATA[
+var map, geocoder;
+window.onload = function () {
+var latlng = new google.maps.LatLng(30.535272, 114.274439 );
+var mapOptions = {
+zoom: 16,
+center: latlng,
+mapTypeId: google.maps.MapTypeId.ROADMAP};
+  map = new google.maps.Map(document.getElementById('mapa'),
+mapOptions);
+  
+// llama a la funcion
+geocoder = new google.maps.Geocoder();
+};
+function codeAddress() {
+var address = document.getElementById('address').value;
+  
+// Función completa de Geocoding
+geocoder.geocode({
+'address': address
+  
+// 'latLng': latlng si lo que queremos ejecutar en geocodificación inversa
+}, function (results, status) {
+if (status == google.maps.GeocoderStatus.OK) {
+document.getElementById('x').innerHTML =
+results[0].geometry.location.lat().toFixed(6);
+document.getElementById('y').innerHTML =
+results[0].geometry.location.lng().toFixed(6);
+map.setCenter(results[0].geometry.location);
+document.getElementById('direccion').innerHTML =
+results[0].formatted_address;
+var marker = new google.maps.Marker({
+map: map,
+position: results[0].geometry.location
+});
+infowindow = new google.maps.InfoWindow({
+content: results[0].formatted_address + '<br> Latitud: ' +
+results[0].geometry.location.lat().toFixed(6) + '<br> Longitud: ' +
+results[0].geometry.location.lng().toFixed(6)
+});
+infowindow.open(map, marker)
+}
+  
+// Se detallan los diferentes tipos de error
+else {
+alert('LiMengYan no tuvo éxito por la siguiente razón: ' + status)
+}
+})
+};
+//]]>
+</script>
