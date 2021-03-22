@@ -1,5 +1,5 @@
 //<!-- Se determina y escribe la localizacion: -->
-//<script type='text/javascript'>
+<script type='text/javascript'>
 if (navigator.geolocation) {
 navigator.geolocation.getCurrentPosition(mostrarUbicacion);
 } else {alert('¡Error! Este navegador no soporta la Geolocalización.');}
@@ -13,4 +13,4 @@ var div = document.getElementById('ubicacion');
 div.innerHTML ='Latitud: ' + latitud + '<br>Longitud: ' + longitud;}
 function refrescarUbicacion() {
 navigator.geolocation.watchPosition(mostrarUbicacion);}
-//</script>
+</script>
