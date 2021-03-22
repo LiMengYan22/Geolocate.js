@@ -1,0 +1,51 @@
+<div id='ventana-flotante' class='animate slideUp, floating'>
+  <div id='contenedor'>
+     <a class='cerrar' href='javascript:void(0);'onclick='document.getElementById(&apos;ventana-flotante&apos;).className= &apos;oculto&apos;'>x</a>
+
+  <div align='center' class='contenido'>
+    <h4 style='color: #e89980'><br>TU POSICIÓN:
+      <div id='ubicacion'></div>
+    </h4>
+   
+   
+  <div id="texto">
+    <script src="https://maps.googleapis.com/maps/api/js? sensor=false&amp;language=es"></script>
+    <style type="text/css">
+       #texto{color:#e89980;width:100%;height:100%;float:left;padding:0%}
+       #texto input.navi{font-size:10px;width:100%;height:0px;margin-bottom:0px;padding-left:0%}
+    </style>
+
+    <h6>
+     <input id="address" float="left" type="textbox" size="20" maxlength="80" value="" placeholder="Dirección o Lat, Lng" /><br>
+        Latitud: <span style="color:#e89980" id="x"></span><br>
+        Longitud: <span style="color:#e89980" id="y"></span><br>
+        Dirección completa: <span style="color:#e89980" id="direccion"></span><br>
+     <input type="button" value="Localizar" onclick="codeAddress()"><br>
+   </h6>
+ </div>
+
+
+<!-- Se determina y escribe la localizacion: -->
+<script type='text/javascript'>
+if (navigator.geolocation) {
+navigator.geolocation.getCurrentPosition(mostrarUbicacion);
+} else {alert('¡Error! Este navegador no soporta la Geolocalización.');}
+function mostrarUbicacion(position) {
+var times = position.timestamp;
+var latitud = position.coords.latitude;
+var longitud = position.coords.longitude;
+var altitud = position.coords.altitude;
+var exactitud = position.coords.accuracy;
+var div = document.getElementById('ubicacion');
+div.innerHTML ='Latitud: ' + latitud + '<br>Longitud: ' + longitud;}
+function refrescarUbicacion() {
+navigator.geolocation.watchPosition(mostrarUbicacion);}
+</script>
+
+
+    </div>
+  </div>
+</div>
+
+
+
